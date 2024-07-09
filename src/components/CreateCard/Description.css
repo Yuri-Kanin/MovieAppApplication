@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+.cardDescription {
+  font: inherit;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 12px;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  margin: 0 20px;
+  line-height: 22px;
+}
+
+.cardDescription_title {
+  margin-top: 5px;
+  padding-right: 20px;
+  font-size: 20px;
+}

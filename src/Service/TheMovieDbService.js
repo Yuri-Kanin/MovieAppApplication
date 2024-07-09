@@ -1,0 +1,25 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unused-class-component-methods */
+import { Component } from "react";
+import MovieServiceDB from "../Services/MovieService";
+import GuestSessionServiceDB from "../Services/GuestSessionService";
+import RatingServiceDB from "../Services/RatingService";
+
+export default class TheMovieDbService extends Component {
+  constructor() {
+    super();
+    this.MovieService = new MovieServiceDB();
+    this.GuestSessionService = new GuestSessionServiceDB();
+    this.RatingService = new RatingServiceDB();
+  }
+
+  getMovies = (currentPage, searchWord) =>
+    this.MovieService.getMovies(currentPage, searchWord);
+
+  Authorization = () => this.GuestSessionService.Authorization();
+
+  AddRating = (guestSessionId, movieId, value) =>
+    this.RatingService.AddRating(guestSessionId, movieId, value);
+
+  GetRating = (guestSessionId) => this.RatingService.GetRating(guestSessionId);
+}

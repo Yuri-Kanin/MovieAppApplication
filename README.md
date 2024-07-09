@@ -1,2 +1,0 @@
-# MovieAppApplication
- MovieApp

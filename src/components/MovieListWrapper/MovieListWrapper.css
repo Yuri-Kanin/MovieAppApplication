@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  list-style: none;
+  margin-top: 40px;
+}
+
+.movieList > li {
+  box-shadow: 3px 3px 3px gray;
+  margin-bottom: 40px;
+}
+
+.cardWrapper {
+  width: 938px;
+}
+
+.cardImage {
+  width: 183px;
+  object-fit: cover;
+}
+
+.movieCard {
+  position: relative;
+  display: flex;
+  width: 451px;
+  height: 279px;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.movieCard:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.cardDescription {
+  font: inherit;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 12px;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  margin: 0 20px;
+  line-height: 22px;
+}
+
+.cardDescription_title {
+  margin-top: 5px;
+  padding-right: 20px;
+  font-size: 20px;
+  max-height: 66px;
+  overflow: hidden;
+}

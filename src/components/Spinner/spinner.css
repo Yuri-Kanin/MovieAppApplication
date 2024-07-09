@@ -1,0 +1,9 @@
+.spinner {
+  width: 451px;
+  height: 279px;
+  text-align: center;
+}
+
+.spinner > div {
+  margin-top: 120px;
+}

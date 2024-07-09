@@ -1,0 +1,22 @@
+.navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.navigation_text {
+  font-family: "Inter UI", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 14px;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  line-height: 22px;
+  padding: 10px;
+  border-bottom: 1px solid #1890ff;
+}
+
+.navigation_active {
+  color: #1890ff;
+  border-bottom: 3px solid #1890ff;
+}
