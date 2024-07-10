@@ -16,3 +16,9 @@
 form:focus-visible {
   border-color: #1890ff;
 }
+
+@media screen and (max-width: 420px) {
+  .input {
+    width: 388px;
+  }
+}

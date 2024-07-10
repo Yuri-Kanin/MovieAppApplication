@@ -54,3 +54,41 @@
   max-height: 66px;
   overflow: hidden;
 }
+
+.cardDescription_title:hover {
+  overflow-y: scroll;
+}
+
+.tags {
+  max-height: 22px;
+  overflow: hidden;
+}
+
+.tags:hover {
+  overflow-y: scroll;
+}
+
+.cardImageMobile {
+  display: none;
+}
+
+@media screen and (max-width: 420px) {
+  .cardWrapper {
+    width: 388px;
+  }
+  .cardImage {
+    display: none;
+  }
+
+  .movieCard {
+    width: 388px;
+  }
+
+  .cardImageMobile {
+    display: block;
+    float: left;
+    width: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+}

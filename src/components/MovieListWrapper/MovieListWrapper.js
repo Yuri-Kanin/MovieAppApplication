@@ -9,7 +9,7 @@ function MovieListWrapper({ MovieList, RateChangeHandler, onRateClick }) {
   const uniqueKey = require("unique-key");
 
   function createMovieList(array) {
-    const MovieListChanged = array.map((oneOfTheMovie, index) => (
+    const MovieListChanged = array.map((oneOfTheMovie) => (
       <li key={uniqueKey()}>
         <div className="movieCard">
           <img
@@ -22,19 +22,35 @@ function MovieListWrapper({ MovieList, RateChangeHandler, onRateClick }) {
             alt="Movie"
           />
           <div className="cardDescription">
+            <img
+              className="cardImageMobile"
+              src={
+                oneOfTheMovie.imgLink
+                  ? `https://image.tmdb.org/t/p/w500${oneOfTheMovie.imgLink}`
+                  : "https://i.ytimg.com/vi/tQnYVnH4g-k/hqdefault.jpg"
+              }
+              alt="Movie"
+            />
             <h3 className="cardDescription_title">{oneOfTheMovie.title}</h3>
             <RateIndex RateValue={oneOfTheMovie.rating} />
             <p style={{ color: "#827E7E" }}>{oneOfTheMovie.releaseDate}</p>
-            <Tags genres={oneOfTheMovie.genre} />
+            <div className="tags">
+              <Tags genres={oneOfTheMovie.genre} />
+            </div>
             <p>{oneOfTheMovie.description}</p>
             <Rate
               allowHalf
               defaultValue={oneOfTheMovie.personalEstimate}
               count={10}
-              style={{ fontSize: "14px" }}
+              style={{
+                fontSize: "14px",
+                position: "absolute",
+                right: "10px",
+                bottom: "10px",
+              }}
               onChange={(estimation) => {
                 RateChangeHandler(estimation, oneOfTheMovie.id);
-                onRateClick(estimation, index);
+                onRateClick(estimation, oneOfTheMovie.id);
               }}
             />
           </div>

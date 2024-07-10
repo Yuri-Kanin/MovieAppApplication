@@ -5,6 +5,7 @@ import { Provider } from "../../AppContext/AppContext";
 import MainPage from "../MainPage(refact)/MainPage";
 import RatedPage from "../RatedPage/RatedPage";
 import Navigation from "../Navigation/Navigation";
+import "./MovieApp.css";
 
 export default class MovieApp extends Component {
   TheMovieDbService = new TheMovieDbService();
@@ -21,16 +22,15 @@ export default class MovieApp extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.getSessionId();
-  // }
+  componentDidMount() {
+    this.getSessionId();
+  }
 
   onChangePageHandler = async (event) => {
     const { sessionId, isEstimated } = this.state;
-    const GetRating = await this.TheMovieDbService.GetRating(sessionId);
-    this.setState({ EstimatedList: GetRating });
-
     if (event.target.textContent === "Rated" && isEstimated) {
+      const GetRating = await this.TheMovieDbService.GetRating(sessionId, 1);
+      this.setState({ EstimatedList: GetRating });
       this.setState({ isRatedClicked: true });
     } else {
       this.setState({ isRatedClicked: false });
@@ -53,6 +53,12 @@ export default class MovieApp extends Component {
     this.setState({ sessionId: GuestSessionId });
   };
 
+  onPaginatorChangeHandler = async (value) => {
+    const { sessionId } = this.state;
+    const GetRating = await this.TheMovieDbService.GetRating(sessionId, value);
+    this.setState({ EstimatedList: GetRating });
+  };
+
   render() {
     const { isRatedClicked, EstimatedList, sessionId } = this.state;
 
@@ -65,7 +71,10 @@ export default class MovieApp extends Component {
           }}
         />
         {isRatedClicked && sessionId ? (
-          <RatedPage RatingList={EstimatedList} />
+          <RatedPage
+            RatingList={EstimatedList}
+            onPaginatorChangeHandler={this.onPaginatorChangeHandler}
+          />
         ) : (
           <MainPage RateChangeHandler={this.RateChangeHandler} />
         )}

@@ -19,7 +19,7 @@ export default class RatingService {
           }),
         }
       );
-      console.log("Успешно добавлен рейтинг для фильма:");
+
       const status = await response.json();
       const { success } = status;
 
@@ -33,13 +33,15 @@ export default class RatingService {
   // eslint-disable-next-line class-methods-use-this
   getString = (str) => `${str.split(" ", 29).join(" ")}...`;
 
-  async GetRating(guestSessionId) {
+  async GetRating(guestSessionId, page) {
     const response = await fetch(
-      `${this.Data.mainSource}guest_session/${guestSessionId}/rated/movies?&language=en-US&page=1&sort_by=created_at.asc`,
+      `${this.Data.mainSource}guest_session/${guestSessionId}/rated/movies?&language=en-US&page=${page}&sort_by=created_at.asc`,
       this.Data.metaData
     );
     const toJSON = await response.json();
     const ratingList = await toJSON.results;
+    const totalPages = await toJSON.total_pages;
+
     const { format } = require("date-fns");
     const Data = ratingList.map((el) => ({
       id: el.id,
@@ -53,6 +55,6 @@ export default class RatingService {
       genre: el.genre_ids,
       personalEstimate: el.rating,
     }));
-    return Data;
+    return { Data, totalPages };
   }
 }

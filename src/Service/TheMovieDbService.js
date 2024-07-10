@@ -21,5 +21,6 @@ export default class TheMovieDbService extends Component {
   AddRating = (guestSessionId, movieId, value) =>
     this.RatingService.AddRating(guestSessionId, movieId, value);
 
-  GetRating = (guestSessionId) => this.RatingService.GetRating(guestSessionId);
+  GetRating = (guestSessionId, pageNumber) =>
+    this.RatingService.GetRating(guestSessionId, pageNumber);
 }

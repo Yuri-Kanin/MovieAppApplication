@@ -31,9 +31,15 @@ export default class MovieApp extends Component {
     this.setState({ movieList, totalPages, loading: false });
   };
 
-  // eslint-disable-next-line class-methods-use-this
-  onRateClick = (estimation, index) => {
-    console.log(estimation, index);
+  onRateClick = (estimation, id) => {
+    const { movieList } = this.state;
+    const newMovieList = movieList.map((el) => {
+      if (el.id === id) {
+        return { ...el, personalEstimate: estimation };
+      }
+      return el;
+    });
+    this.setState({ movieList: newMovieList });
   };
 
   onPaginatorChangeHandler = (value) => {
@@ -46,7 +52,9 @@ export default class MovieApp extends Component {
     const { onPaginatorChangeHandler, onRateClick } = this;
 
     function errorCheck() {
-      const errIndicator = error ? <AlertComponent /> : null;
+      const errIndicator = error ? (
+        <AlertComponent message="Некорректный запрос" />
+      ) : null;
       return errIndicator;
     }
 
@@ -68,7 +76,7 @@ export default class MovieApp extends Component {
             </section>
             <PaginationEl
               onPaginatorChangeHandler={onPaginatorChangeHandler}
-              totalPages={totalPages}
+              totalPages={totalPages * 10}
               currentPage={currentPage}
             />
           </>

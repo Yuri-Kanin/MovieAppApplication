@@ -1,16 +1,25 @@
 import { Pagination } from "antd";
 import PropTypes from "prop-types";
+import { Component } from "react";
 
-function PaginationEl({ onPaginatorChangeHandler, totalPages, currentPage }) {
-  return (
-    <Pagination
-      defaultCurrent={currentPage}
-      total={totalPages}
-      onChange={(numberPage) => {
-        onPaginatorChangeHandler(numberPage);
-      }}
-    />
-  );
+class PaginationEl extends Component {
+  shouldComponentUpdate(nextProps) {
+    const { totalPages } = this.props;
+    return totalPages !== nextProps.totalPages;
+  }
+
+  render() {
+    const { onPaginatorChangeHandler, totalPages, currentPage } = this.props;
+    return (
+      <Pagination
+        defaultCurrent={currentPage}
+        total={totalPages}
+        onChange={(numberPage) => {
+          onPaginatorChangeHandler(numberPage);
+        }}
+      />
+    );
+  }
 }
 
 PaginationEl.propTypes = {

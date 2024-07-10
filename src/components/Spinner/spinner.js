@@ -7,13 +7,15 @@ function Spinner() {
   const uniqueKey = require("unique-key");
 
   return (
-    <ul className="movieList">
-      {[...Array(20)].map((_) => (
-        <li key={uniqueKey()} className="spinner">
-          <Spin size="large" />
-        </li>
-      ))}
-    </ul>
+    <section className="cardWrapper">
+      <ul className="movieList">
+        {[...Array(20)].map((_) => (
+          <li key={uniqueKey()} className="spinner">
+            <Spin size="large" />
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 export default Spinner;
