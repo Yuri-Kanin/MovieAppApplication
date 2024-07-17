@@ -4,6 +4,7 @@ import { Component } from "react";
 import MovieServiceDB from "../Services/MovieService";
 import GuestSessionServiceDB from "../Services/GuestSessionService";
 import RatingServiceDB from "../Services/RatingService";
+import GenresServiceDB from "../Services/GenresService";
 
 export default class TheMovieDbService extends Component {
   constructor() {
@@ -11,6 +12,7 @@ export default class TheMovieDbService extends Component {
     this.MovieService = new MovieServiceDB();
     this.GuestSessionService = new GuestSessionServiceDB();
     this.RatingService = new RatingServiceDB();
+    this.GenresService = new GenresServiceDB();
   }
 
   getMovies = (currentPage, searchWord) =>
@@ -23,4 +25,6 @@ export default class TheMovieDbService extends Component {
 
   GetRating = (guestSessionId, pageNumber) =>
     this.RatingService.GetRating(guestSessionId, pageNumber);
+
+  GetGenres = () => this.GenresService.GetGenres();
 }

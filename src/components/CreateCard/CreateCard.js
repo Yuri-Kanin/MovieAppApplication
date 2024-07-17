@@ -28,20 +28,10 @@ function CreateCard({ movieData }) {
           />
           <h3 className="cardDescription_title">{movieData.title}</h3>
           <RateIndex RateValue={movieData.rating} />
-          <p style={{ color: "#827E7E" }}>{movieData.releaseDate}</p>
+          <p className="releaseDate">{movieData.releaseDate}</p>
           <Tags genres={movieData.genre} />
           <p>{movieData.description}</p>
-          <Rate
-            allowHalf
-            value={movieData.personalEstimate}
-            count={10}
-            style={{
-              fontSize: "14px",
-              position: "absolute",
-              right: "10px",
-              bottom: "10px",
-            }}
-          />
+          <Rate allowHalf value={movieData.personalEstimate} count={10} />
         </div>
       </div>
     </li>

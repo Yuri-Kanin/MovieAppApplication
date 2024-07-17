@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-boolean-value */
 import { Pagination } from "antd";
 import PropTypes from "prop-types";
 import { Component } from "react";
@@ -13,7 +14,9 @@ class PaginationEl extends Component {
     return (
       <Pagination
         defaultCurrent={currentPage}
+        pageSize={20}
         total={totalPages}
+        showSizeChanger={false}
         onChange={(numberPage) => {
           onPaginatorChangeHandler(numberPage);
         }}

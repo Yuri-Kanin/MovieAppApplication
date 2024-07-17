@@ -1,6 +1,6 @@
+/* eslint-disable react/no-unused-class-component-methods */
 import { Component } from "react";
 import TheMovieDbService from "../../Service/TheMovieDbService";
-import Genres from "../../Services/GenresService";
 import { Provider } from "../../AppContext/AppContext";
 import MainPage from "../MainPage(refact)/MainPage";
 import RatedPage from "../RatedPage/RatedPage";
@@ -10,8 +10,6 @@ import "./MovieApp.css";
 export default class MovieApp extends Component {
   TheMovieDbService = new TheMovieDbService();
 
-  Genres = new Genres();
-
   constructor(props) {
     super(props);
     this.state = {
@@ -19,12 +17,22 @@ export default class MovieApp extends Component {
       isEstimated: false,
       isRatedClicked: false,
       EstimatedList: null,
+      StarsList: {},
+      Genres: [],
     };
   }
 
   componentDidMount() {
     this.getSessionId();
+    this.TheMovieDbService.GetGenres().then((res) =>
+      this.setState({ Genres: res })
+    );
   }
+
+  Genres = async () => {
+    const genres = await this.TheMovieDbService.GetGenres();
+    return { genres };
+  };
 
   onChangePageHandler = async (event) => {
     const { sessionId, isEstimated } = this.state;
@@ -44,7 +52,15 @@ export default class MovieApp extends Component {
       movieId,
       estimation
     );
+
     if (addEstimation) this.setState({ isEstimated: true });
+  };
+
+  onRateClick = (estimation, id) => {
+    const { StarsList } = this.state;
+
+    StarsList[id] = estimation;
+    this.setState({ StarsList });
   };
 
   // eslint-disable-next-line react/no-unused-class-component-methods
@@ -60,10 +76,11 @@ export default class MovieApp extends Component {
   };
 
   render() {
-    const { isRatedClicked, EstimatedList, sessionId } = this.state;
+    const { isRatedClicked, EstimatedList, sessionId, StarsList, Genres } =
+      this.state;
 
     return (
-      <Provider value={this.Genres}>
+      <Provider value={Genres}>
         <Navigation
           isRatedClicked={isRatedClicked}
           onChangePageHandler={(event) => {
@@ -76,7 +93,11 @@ export default class MovieApp extends Component {
             onPaginatorChangeHandler={this.onPaginatorChangeHandler}
           />
         ) : (
-          <MainPage RateChangeHandler={this.RateChangeHandler} />
+          <MainPage
+            RateChangeHandler={this.RateChangeHandler}
+            StarsList={StarsList}
+            onRateClick={this.onRateClick}
+          />
         )}
       </Provider>
     );

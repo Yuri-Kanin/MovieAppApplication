@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Component } from "react";
 import PropTypes from "prop-types";
 import Searcher from "../Searcher(refact)/Searcher";
@@ -31,25 +32,15 @@ export default class MovieApp extends Component {
     this.setState({ movieList, totalPages, loading: false });
   };
 
-  onRateClick = (estimation, id) => {
-    const { movieList } = this.state;
-    const newMovieList = movieList.map((el) => {
-      if (el.id === id) {
-        return { ...el, personalEstimate: estimation };
-      }
-      return el;
-    });
-    this.setState({ movieList: newMovieList });
-  };
-
   onPaginatorChangeHandler = (value) => {
     this.setState({ currentPage: value });
   };
 
   render() {
     const { movieList, totalPages, currentPage, error, loading } = this.state;
-    const { RateChangeHandler } = this.props;
-    const { onPaginatorChangeHandler, onRateClick } = this;
+    const { RateChangeHandler, onRateClick, StarsList } = this.props;
+
+    const { onPaginatorChangeHandler } = this;
 
     function errorCheck() {
       const errIndicator = error ? (
@@ -69,14 +60,20 @@ export default class MovieApp extends Component {
           <>
             <section className="cardWrapper">
               <MovieListWrapper
-                MovieList={movieList}
+                MovieList={movieList.map((el) => {
+                  if (StarsList[el.id]) {
+                    return { ...el, personalEstimate: StarsList[el.id] };
+                  }
+                  return el;
+                })}
                 RateChangeHandler={RateChangeHandler}
                 onRateClick={onRateClick}
               />
             </section>
             <PaginationEl
               onPaginatorChangeHandler={onPaginatorChangeHandler}
-              totalPages={totalPages * 10}
+              totalPages={totalPages * 20}
+              pageSize={20}
               currentPage={currentPage}
             />
           </>
@@ -102,4 +99,5 @@ export default class MovieApp extends Component {
 }
 MovieApp.propTypes = {
   RateChangeHandler: PropTypes.func.isRequired,
+  onRateClick: PropTypes.func.isRequired,
 };

@@ -1,11 +1,12 @@
 /* eslint-disable global-require */
 import PropTypes from "prop-types";
 import { Alert } from "antd";
+import "./Alert.css";
 
 function AlertComponent({ message }) {
   const uniqueKey = require("unique-key");
   return (
-    <ul style={{ marginTop: "20px" }}>
+    <ul className="alert">
       <li key={uniqueKey()}>
         <Alert message="Error" description={message} type="error" showIcon />
       </li>

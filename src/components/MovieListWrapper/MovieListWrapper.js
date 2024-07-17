@@ -33,7 +33,7 @@ function MovieListWrapper({ MovieList, RateChangeHandler, onRateClick }) {
             />
             <h3 className="cardDescription_title">{oneOfTheMovie.title}</h3>
             <RateIndex RateValue={oneOfTheMovie.rating} />
-            <p style={{ color: "#827E7E" }}>{oneOfTheMovie.releaseDate}</p>
+            <p className="releaseDate">{oneOfTheMovie.releaseDate}</p>
             <div className="tags">
               <Tags genres={oneOfTheMovie.genre} />
             </div>
@@ -42,12 +42,6 @@ function MovieListWrapper({ MovieList, RateChangeHandler, onRateClick }) {
               allowHalf
               defaultValue={oneOfTheMovie.personalEstimate}
               count={10}
-              style={{
-                fontSize: "14px",
-                position: "absolute",
-                right: "10px",
-                bottom: "10px",
-              }}
               onChange={(estimation) => {
                 RateChangeHandler(estimation, oneOfTheMovie.id);
                 onRateClick(estimation, oneOfTheMovie.id);

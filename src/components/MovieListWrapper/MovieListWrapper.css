@@ -2,7 +2,8 @@
 .movieList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 40px;
   align-content: center;
   list-style: none;
   margin-top: 40px;
@@ -10,11 +11,6 @@
 
 .movieList > li {
   box-shadow: 3px 3px 3px gray;
-  margin-bottom: 40px;
-}
-
-.cardWrapper {
-  width: 938px;
 }
 
 .cardImage {
@@ -70,6 +66,21 @@
 
 .cardImageMobile {
   display: none;
+}
+
+.releaseDate {
+  color: #827e7e;
+}
+
+.ant-rate {
+  font-size: 14px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.ant-pagination {
+  margin: 20px 0;
 }
 
 @media screen and (max-width: 420px) {
